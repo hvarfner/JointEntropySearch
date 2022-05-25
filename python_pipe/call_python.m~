@@ -1,0 +1,7 @@
+function python_res = call_python(command, x)
+    python_cmd = join([command string(x)])
+    [success, res] = system(python_cmd)
+    if success != 0:
+    python_res = str2double(res)
+end
+

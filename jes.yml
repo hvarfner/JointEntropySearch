@@ -1,0 +1,38 @@
+name: jes
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - _libgcc_mutex=0.1=conda_forge
+  - _openmp_mutex=4.5=2_gnu
+  - binutils_impl_linux-64=2.36.1=h193b22a_2
+  - clang=14.0.3=ha770c72_0
+  - clang-14=14.0.3=default_h2e3cab8_0
+  - clang-format=14.0.3=default_h2e3cab8_0
+  - clang-format-14=14.0.3=default_h2e3cab8_0
+  - clang-tools=14.0.3=default_h2e3cab8_0
+  - clangdev=14.0.3=default_h2e3cab8_0
+  - clangxx=14.0.3=default_ha074a59_0
+  - gcc_impl_linux-64=11.2.0=h82a94d6_16
+  - gsl=2.7=he838d99_0
+  - kernel-headers_linux-64=2.6.32=he073ed8_15
+  - ld_impl_linux-64=2.36.1=hea4e1c9_2
+  - libblas=3.9.0=14_linux64_openblas
+  - libcblas=3.9.0=14_linux64_openblas
+  - libclang=14.0.3=default_h2e3cab8_0
+  - libclang-cpp=14.0.3=default_h2e3cab8_0
+  - libclang-cpp14=14.0.3=default_h2e3cab8_0
+  - libclang13=14.0.3=default_h3a83d3e_0
+  - libgcc-devel_linux-64=11.2.0=h0952999_16
+  - libgcc-ng=11.2.0=h1d223b6_16
+  - libgfortran-ng=11.2.0=h69a702a_16
+  - libgfortran5=11.2.0=h5c6108e_16
+  - libgomp=11.2.0=h1d223b6_16
+  - libllvm14=14.0.3=he0ac6c6_0
+  - libopenblas=0.3.20=pthreads_h78a6416_0
+  - libsanitizer=11.2.0=he4da1e4_16
+  - libstdcxx-ng=11.2.0=he4da1e4_16
+  - libzlib=1.2.11=h166bdaf_1014
+  - llvm-tools=14.0.3=he0ac6c6_0
+  - llvmdev=14.0.3=he0ac6c6_0
+  - sysroot_linux-64=2.12=he073ed8_15
