@@ -39,7 +39,7 @@ matlab -nodisplay -nosplash -nodesktop -r "synthetic_task(path, seed, approach, 
 
 So to run Hartmann (6D):
 ```
-matlab -nodisplay -nosplash -nodesktop -r "synthetic_task('synthetic/hartmann6.py, 37, 'MES', 6);exit;"
+matlab -nodisplay -nosplash -nodesktop -r "synthetic_task('synthetic/hartmann6.py", 37, 'MES', 6);exit;"
 ```
 
 Every experiment is automatically stored in a csv in experiments/results. The recommended points, which are needed for inference regret, are all evaluated _after_ the full run is finished. These queries are appended to the same csv.

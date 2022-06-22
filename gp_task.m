@@ -1,7 +1,7 @@
-function success = run_exp(path, seed, approach, dim)
+function success = gp_task(path, seed, approach, dim)
     % add necessary paths
     deploy;
-
+    path
     % Define function
     dx = dim;
     xmin = zeros(dx,1);

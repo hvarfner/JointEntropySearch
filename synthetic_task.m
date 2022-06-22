@@ -1,4 +1,4 @@
-function success = run_exp_synthetic(path, seed, approach, dim, gam)
+function success = synthetic_task(path, seed, approach, dim, gam)
     % add necessary paths
     deploy;
 
@@ -10,7 +10,7 @@ function success = run_exp_synthetic(path, seed, approach, dim, gam)
 
     exp_path = fullfile(fullfile(pwd, 'experiments'), path);
     % here, we just give the path to the experiment and the seed to run
-
+    % gamma - gamma-greedy parameter
     f = python_pipe(seed, exp_path, append('gam', num2str(gam)), approach);
 
     % Save the file to a path
