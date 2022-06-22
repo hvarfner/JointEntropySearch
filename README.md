@@ -9,8 +9,7 @@ All code has been tested with MATLAB 2021a. After installing the conda environme
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/path/to/conda/envs/jes/lib
 ``` 
 
-and everything should be up and running. All experiments are run in Python3.7+, so a working such installation is necessary, and is not provided through the conda environment (which is unfortunately required to be in Python2).
-
+and everything should be up and running.
 
 While the required mex file is included, it may need to be re-compiled. To do so, do:
 
