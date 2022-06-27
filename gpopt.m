@@ -25,9 +25,9 @@ if ~isfield(options, 'bo_method'); options.bo_method = 'JES'; end
 % When testing synthetic functions, one can add noise to the output.
 
 % Number of hyper parameter settings to be sampled.
-if isfield(options, 'nM'); nM = options.nM; else nM = 20; end
+if isfield(options, 'nM'); nM = options.nM; else nM = 10; end
 % Number of maximums to be sampled.
-if isfield(options, 'nK'); nK = options.nK; else nK = 5; end
+if isfield(options, 'nK'); nK = options.nK; else nK = 10; end
 if isfield(options, 'epsilon'); epsilon = options.epsilon; else epsilon = 0.1; end
 if isfield(options, 'nFeatures')
     nFeatures = options.nFeatures;
@@ -96,6 +96,12 @@ for t = tstart+1 : T
             guesses, sigma0, sigma, l, xmin, xmax, nFeatures);
     elseif strcmp(options.bo_method, 'MES')
         optimum = mesg_choose(nM, nK, xx, yy, KernelMatrixInv, ...
+        guesses, sigma0, sigma, l, xmin, xmax);
+    elseif strcmp(options.bo_method, 'PES')
+        [optimum, acqval] = pes_choose(nM, nK, xx, -yy, KernelMatrixInv, ...
+        guesses, sigma0, sigma, l, xmin, xmax, nFeatures, epsilon);
+    elseif strcmp(options.bo_method, 'FITBO')
+        optimum = fitbo_choose(nM, nK, xx, yy, KernelMatrixInv, ...
             guesses, sigma0, sigma, l, xmin, xmax);
     elseif strcmp(options.bo_method, 'EI')
         optimum = ei_choose(xx, yy, KernelMatrixInv, guesses, ...
