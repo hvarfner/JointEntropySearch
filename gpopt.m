@@ -25,9 +25,9 @@ if ~isfield(options, 'bo_method'); options.bo_method = 'JES'; end
 % When testing synthetic functions, one can add noise to the output.
 
 % Number of hyper parameter settings to be sampled.
-if isfield(options, 'nM'); nM = options.nM; else nM = 10; end
+if isfield(options, 'nM'); nM = options.nM; else nM = 20; end
 % Number of maximums to be sampled.
-if isfield(options, 'nK'); nK = options.nK; else nK = 10; end
+if isfield(options, 'nK'); nK = options.nK; else nK = 5; end
 if isfield(options, 'epsilon'); epsilon = options.epsilon; else epsilon = 0.1; end
 if isfield(options, 'nFeatures')
     nFeatures = options.nFeatures;
@@ -35,7 +35,7 @@ else
     nFeatures = 1000;
 end
 if ~isfield(options, 'seed'); options.seed = 42; end
-if ~isfield(options, 'learn_interval'); options.learn_interval = 10; end
+if ~isfield(options, 'learn_interval'); options.learn_interval = 1; end
 if ~isfield(options, 'normalize'); options.normalize = 0; end
 
 if ~isfield(options, 'InferObjective')
@@ -101,8 +101,19 @@ for t = tstart+1 : T
         [optimum, acqval] = pes_choose(nM, nK, xx, -yy, KernelMatrixInv, ...
         guesses, sigma0, sigma, l, xmin, xmax, nFeatures, epsilon);
     elseif strcmp(options.bo_method, 'FITBO')
-        optimum = fitbo_choose(nM, nK, xx, yy, KernelMatrixInv, ...
-            guesses, sigma0, sigma, l, xmin, xmax);
+        % sample the eta's here
+        mean_ln_yminob_minus_eta = log(1.0);
+        var_ln_yminob_minus_eta  = 0.1;      
+        hypsamples = [ 1 ./ sqrt(l) sigma sigma0 ];
+
+        ln_eta = sample_eta(hypsamples, xx, -yy, nK, mean_ln_yminob_minus_eta,var_ln_yminob_minus_eta, 0);
+        [mean_ln_yminob_minus_eta, var_ln_yminob_minus_eta] = normfit(ln_eta);
+        min_y = min(-yy)
+        eta = min_y - exp(ln_eta)
+
+        % and then choose
+        optimum = fitbo_choose(nM, nK, xx, -yy, KernelMatrixInv, ...
+            guesses, eta, sigma0, sigma, l, xmin, xmax);
     elseif strcmp(options.bo_method, 'EI')
         optimum = ei_choose(xx, yy, KernelMatrixInv, guesses, ...
             sigma0, sigma, l, xmin, xmax);

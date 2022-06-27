@@ -1,6 +1,6 @@
 % Copyright (c) 2017 Zi Wang
 function [optimum, optval] = fitbo_choose(nM, nK, xx, yy, KernelMatrixInv, ...
-    guesses, sigma0, sigma, l, xmin, xmax, nFeatures, epsilon)
+    guesses, eta, sigma0, sigma, l, xmin, xmax, nFeatures, epsilon)
 % This function returns the next evaluation point using MES-R.
 % nM is the number of sampled GP hyper-parameter settings.
 % nK is the number of sampled maximum values.
@@ -16,4 +16,12 @@ function [optimum, optval] = fitbo_choose(nM, nK, xx, yy, KernelMatrixInv, ...
 
 d = size(xx, 2);
 
-[optimum, optval] = globalMaximization(acfun, xmin, xmax, [guesses;xx; locs_reshaped]);
+l = repmat(l, nK, 1);
+sigma0 = repmat(sigma0, nK, 1);
+sigma = repmat(sigma, nK, 1);
+KernelMatrixInv = repmat(KernelMatrixInv, 1, nK)';
+
+eta = reshape(eta, nM * nK, 1);
+
+acfun = @(x) evaluateFITBO(x, xx, yy, KernelMatrixInv, l, sigma, sigma0, eta, nM * nK);
+[optimum, optval] = globalMaximization(acfun, xmin, xmax, guesses);

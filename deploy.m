@@ -8,6 +8,7 @@ addpath GPstuff-4.4/optim
 addpath GPstuff-4.4/xunit
 addpath utils/
 addpath acFuns/
+addpath sampler/
 addpath python_pipe/
 
 % Comment out the following if not using test_functions/

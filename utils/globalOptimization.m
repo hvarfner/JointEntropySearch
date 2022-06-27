@@ -19,10 +19,8 @@ function [ optimum fval ] = globalOptimization(target, gradient, xmin, xmax, gue
 	targetOptimization = @(x) deal(target(x), gradient(x));
 
 	% We optimize starting at the best location
-
 	[ optimum, fval, exitflag, output, lambda, grad, retHessian] = fmincon(targetOptimization, start, [], [], [], [], xmin, xmax, [], ...
                 optimset('MaxFunEvals', 100, 'TolX', eps, 'Display', 'off', 'GradObj', 'on'));
-
 	hessian = zeros(d * (d - 1) / 2, 1);
 	counter = 1;
 	if (d > 1)

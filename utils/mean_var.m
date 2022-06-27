@@ -7,6 +7,7 @@ function [meanVector, varVector, meangrad, vargrad] = mean_var(x, ...
 % If nargout <=2, x is of size n x d, meanVector is of size n x 1,
 % and varVector is of size n x 1. 
 % If nargout > 2, x must be of size 1 x d, and all outputs are scalers.
+
 n = size(x,1);
 kstar = computeKnm(x, Xsamples, l_', sigma_);
 meanVector = kstar * KernelMatrixInv * Ysamples;
